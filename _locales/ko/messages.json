@@ -1,0 +1,68 @@
+{
+    "appName": {
+      "message": "인생 타이머"
+    },
+    "appDesc": {
+      "message": "당신의 남은 인생을 눈으로 직접 확인해보세요!"
+    },
+    "enterBirthdate": {
+      "message": "태어난 날짜를 입력 또는 선택하세요:"
+    },
+    "enterDeathdate": {
+      "message": "사망일을 입력 또는 선택하세요:"
+    },
+    "calculate": {
+      "message": "계산하기"
+    },
+    "livedDays": {
+      "message": "지금까지 $days$일을 살았습니다.\n($age$세)",
+      "placeholders": {
+        "days": {
+          "content": "$1"
+        },
+        "age": {
+          "content": "$2"
+        }
+      }
+    },
+    "remainingDays": {
+      "message": "앞으로 $days$일($years$년 $months$개월 $remainingDays$일)\n남았습니다.\n(사망 예정 나이: $deathAge$세)",
+      "placeholders": {
+        "days": {
+          "content": "$1"
+        },
+        "years": {
+          "content": "$2"
+        },
+        "months": {
+          "content": "$3"
+        },
+        "remainingDays": {
+          "content": "$4"
+        },
+        "deathAge": {
+          "content": "$5"
+        }
+      }
+    },
+    "progressPercentage": {
+      "message": "전체 수명의 $percentage$%를 살았습니다.",
+      "placeholders": {
+        "percentage": {
+          "content": "$1"
+        }
+      }
+    },
+    "enterBothDates": {
+      "message": "생년월일과 사망일을 모두 입력/선택해주세요."
+    },
+    "deathDateAfterBirth": {
+      "message": "사망일은 생년월일보다 이후여야 합니다."
+    },
+    "deathDateNotToday": {
+      "message": "사망일은 오늘일 수 없습니다."
+    },
+    "alreadyPassed": {
+      "message": "이미 사망일이 지났습니다."
+    }
+  }

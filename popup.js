@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // 기존 요소 가져오기
+    const appName = document.getElementById('appName');
+    const appTitle = document.getElementById('appTitle');
     const birthdateInput = document.getElementById('birthdate');
     const deathdateInput = document.getElementById('deathdate');
     const calculateButton = document.getElementById('calculate');
@@ -7,6 +10,13 @@ document.addEventListener('DOMContentLoaded', function () {
     const progressContainer = document.getElementById('progress-container');
     const progressBar = document.getElementById('progress-bar');
     const percentageDiv = document.getElementById('percentage');
+
+    // 초기 텍스트 설정
+    appName.textContent = chrome.i18n.getMessage('appName');
+    appTitle.textContent = chrome.i18n.getMessage('appName');
+    document.querySelector('label[for="birthdate"]').textContent = chrome.i18n.getMessage('enterBirthdate');
+    document.querySelector('label[for="deathdate"]').textContent = chrome.i18n.getMessage('enterDeathdate');
+    calculateButton.textContent = chrome.i18n.getMessage('calculate');
 
     chrome.storage.local.get(['birthdate', 'deathdate'], function (result) {
         if (result.birthdate) birthdateInput.value = result.birthdate;
@@ -62,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const deathdateValue = deathdateInput.value;
 
         if (!birthdateValue || !deathdateValue) {
-            alert('생년월일과 사망일을 모두 입력/선택해주세요.');
+            alert(chrome.i18n.getMessage('enterBothDates'));
             return;
         }
 
@@ -72,12 +82,12 @@ document.addEventListener('DOMContentLoaded', function () {
         today.setHours(0, 0, 0, 0);
 
         if (birthDate >= deathDate) {
-            alert('사망일은 생년월일보다 이후여야 합니다.');
+            alert(chrome.i18n.getMessage('deathDateAfterBirth'));
             return;
         }
 
         if (deathDate <= today + 1) {
-            alert('사망일은 오늘일 수 없습니다.');
+            alert(chrome.i18n.getMessage('deathDateNotToday'));
             return;
         }
 
@@ -114,15 +124,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const progressPercentage = (livedDays / totalDays) * 100;
 
         // 결과 표시
-        livedDaysDiv.innerText = `지금까지 ${livedDays.toLocaleString()}일을 살았습니다. \n(${currentAge}세)`;
+        livedDaysDiv.innerText = chrome.i18n.getMessage('livedDays', 
+            [livedDays.toLocaleString(), currentAge]);
+
         if (remainingDays < 0) {
-            remainingDaysDiv.innerText = '이미 사망일이 지났습니다.';
+            remainingDaysDiv.innerText = chrome.i18n.getMessage('alreadyPassed');
             progressContainer.style.display = 'none';
         } else {
-            remainingDaysDiv.innerText =
-                `앞으로 ${remainingDays.toLocaleString()}일(${remainingYears}년 ${remainingMonths}개월 ${remainingDaysLeft}일)\n남았습니다.\n(사망 예정 나이: ${deathAge}세)`;
+            remainingDaysDiv.innerText = chrome.i18n.getMessage('remainingDays', 
+                [remainingDays.toLocaleString(), remainingYears, remainingMonths, remainingDaysLeft, deathAge]);
             progressBar.style.width = `${progressPercentage}%`;
-            percentageDiv.innerText = `전체 수명의 ${progressPercentage.toFixed(2)}%를 살았습니다.`;
+            percentageDiv.innerText = chrome.i18n.getMessage('progressPercentage', 
+                [progressPercentage.toFixed(2)]);
             progressContainer.style.display = 'block';
         }
     }

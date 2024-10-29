@@ -1,0 +1,68 @@
+{
+    "appName": {
+      "message": "Life Timer"
+    },
+    "appDesc": {
+      "message": "Calculate and Visualize your remaining life"
+    },
+    "enterBirthdate": {
+      "message": "Enter or select your birth date:"
+    },
+    "enterDeathdate": {
+      "message": "Enter or select your death date:"
+    },
+    "calculate": {
+      "message": "Calculate"
+    },
+    "livedDays": {
+      "message": "You have lived $days$ days.\n(Age: $age$)",
+      "placeholders": {
+        "days": {
+          "content": "$1"
+        },
+        "age": {
+          "content": "$2"
+        }
+      }
+    },
+    "remainingDays": {
+      "message": "You have $days$ days remaining ($years$ years $months$ months $remainingDays$ days)\n(Expected age at death: $deathAge$)",
+      "placeholders": {
+        "days": {
+          "content": "$1"
+        },
+        "years": {
+          "content": "$2"
+        },
+        "months": {
+          "content": "$3"
+        },
+        "remainingDays": {
+          "content": "$4"
+        },
+        "deathAge": {
+          "content": "$5"
+        }
+      }
+    },
+    "progressPercentage": {
+      "message": "You have lived $percentage$% of your total life.",
+      "placeholders": {
+        "percentage": {
+          "content": "$1"
+        }
+      }
+    },
+    "enterBothDates": {
+      "message": "Please enter both birth date and death date."
+    },
+    "deathDateAfterBirth": {
+      "message": "Death date must be after birth date."
+    },
+    "deathDateNotToday": {
+      "message": "Death date cannot be today."
+    },
+    "alreadyPassed": {
+      "message": "Death date has already passed."
+    }
+  }
