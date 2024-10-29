@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "남은 생명일 표시기",
+  "version": "1.0",
+  "description": "사용자가 설정한 사망일까지 남은 일수를 계산하여 표시합니다.",
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage"]
+}
