@@ -64,5 +64,8 @@
     },
     "alreadyPassed": {
       "message": "이미 사망일이 지났습니다."
+    },
+    "contactMessage": {
+      "message": "* 개선사항, 불편사항 있으시면 문의 남겨주겨세요:"
     }
   }

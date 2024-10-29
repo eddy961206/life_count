@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // 기존 요소 가져오기
     const appName = document.getElementById('appName');
     const appTitle = document.getElementById('appTitle');
+    const contactMessage = document.getElementById('contactMessage');
+    
     const birthdateInput = document.getElementById('birthdate');
     const deathdateInput = document.getElementById('deathdate');
     const calculateButton = document.getElementById('calculate');
@@ -14,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // 초기 텍스트 설정
     appName.textContent = chrome.i18n.getMessage('appName');
     appTitle.textContent = chrome.i18n.getMessage('appName');
+    contactMessage.textContent = chrome.i18n.getMessage('contactMessage');
+
     document.querySelector('label[for="birthdate"]').textContent = chrome.i18n.getMessage('enterBirthdate');
     document.querySelector('label[for="deathdate"]').textContent = chrome.i18n.getMessage('enterDeathdate');
     calculateButton.textContent = chrome.i18n.getMessage('calculate');
