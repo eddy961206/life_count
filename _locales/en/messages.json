@@ -64,5 +64,8 @@
     },
     "alreadyPassed": {
       "message": "Death date has already passed."
+    },
+    "contactMessage": {
+      "message": "* If you have any suggestions or issues, please contact:"
     }
   }
