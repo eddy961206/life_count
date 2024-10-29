@@ -14,6 +14,47 @@ document.addEventListener('DOMContentLoaded', function () {
         if (result.birthdate && result.deathdate) calculateDays();
     });
 
+    // 오늘 날짜를 YYYY-MM-DD 형식으로 변환하는 함수
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+    // 오늘 날짜 설정
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    
+    // deathdate 입력필드의 최소값을 내일로 설정
+    deathdateInput.min = formatDate(tomorrow);
+
+    // 날짜 입력 필드에 대한 이벤트 리스너 추가
+    birthdateInput.addEventListener('input', function(e) {
+        validateDateInput(birthdateInput);
+    });
+
+    deathdateInput.addEventListener('input', function(e) {
+        validateDateInput(deathdateInput);
+    });
+
+    function validateDateInput(inputElement) {
+        const value = inputElement.value;
+        
+        // YYYY-MM-DD 형식의 정규식
+        const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+        
+        if (!dateRegex.test(value)) {
+            return;
+        }
+
+        const date = new Date(value);
+        if (isNaN(date.getTime())) {
+            inputElement.value = '';
+        }
+    }    
+
     calculateButton.addEventListener('click', calculateDays);
 
     function calculateDays() {
@@ -21,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const deathdateValue = deathdateInput.value;
 
         if (!birthdateValue || !deathdateValue) {
-            alert('생년월일과 사망일을 모두 선택해주세요.');
+            alert('생년월일과 사망일을 모두 입력/선택해주세요.');
             return;
         }
 
@@ -32,6 +73,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (birthDate >= deathDate) {
             alert('사망일은 생년월일보다 이후여야 합니다.');
+            return;
+        }
+
+        if (deathDate <= today + 1) {
+            alert('사망일은 오늘일 수 없습니다.');
             return;
         }
 

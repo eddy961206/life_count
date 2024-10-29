@@ -34,6 +34,21 @@ button:hover {
   background-color: #5fb4ac;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+input[type="date"] {
+  position: relative;
+}
+
+/* 날짜 입력 필드에서 기본 달력 아이콘을 숨기지 않고 유지 */
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-datetime-edit {
+  -webkit-appearance: none;
+  display: inline;
+}
+
 #lived-days, #remaining-days {
   margin-top: 15px;
   font-size: 16px;
