@@ -106,13 +106,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const remainingMonths = Math.floor((remainingDays % 365.25) / 30.44);
         const remainingDaysLeft = Math.floor(remainingDays % 30.44);
 
-        // 현재 날짜 포맷팅
-        const currentDate = today.toLocaleDateString('ko-KR', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit'
-        }).replace(/\. /g, '.').replace('.', '');
-
         // 전체 수명
         const totalLifespan = deathDate - birthDate;
         const totalDays = Math.floor(totalLifespan / (1000 * 60 * 60 * 24));
@@ -121,14 +114,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const progressPercentage = (livedDays / totalDays) * 100;
 
         // 결과 표시
-        livedDaysDiv.innerText = `지금까지(${currentDate}) ${livedDays}일을 살았습니다. (${currentAge}세)`;
-
+        livedDaysDiv.innerText = `지금까지 ${livedDays.toLocaleString()}일을 살았습니다. \n(${currentAge}세)`;
         if (remainingDays < 0) {
             remainingDaysDiv.innerText = '이미 사망일이 지났습니다.';
             progressContainer.style.display = 'none';
         } else {
             remainingDaysDiv.innerText =
-                `앞으로 ${remainingDays}일(${remainingYears}년 ${remainingMonths}개월 ${remainingDaysLeft}일)이 남았습니다. (사망 예정 나이: ${deathAge}세)`;
+                `앞으로 ${remainingDays.toLocaleString()}일(${remainingYears}년 ${remainingMonths}개월 ${remainingDaysLeft}일)\n남았습니다.\n(사망 예정 나이: ${deathAge}세)`;
             progressBar.style.width = `${progressPercentage}%`;
             percentageDiv.innerText = `전체 수명의 ${progressPercentage.toFixed(2)}%를 살았습니다.`;
             progressContainer.style.display = 'block';
