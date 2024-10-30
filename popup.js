@@ -1,30 +1,30 @@
-document.addEventListener('DOMContentLoaded', function () {
+$(document).ready(function () {
     // 기존 요소 가져오기
-    const appName = document.getElementById('appName');
-    const appTitle = document.getElementById('appTitle');
-    const contactMessage = document.getElementById('contactMessage');
+    const appName = $('#appName');
+    const appTitle = $('#appTitle');
+    const contactMessage = $('#contactMessage');
     
-    const birthdateInput = document.getElementById('birthdate');
-    const deathdateInput = document.getElementById('deathdate');
-    const calculateButton = document.getElementById('calculate');
-    const livedDaysDiv = document.getElementById('lived-days');
-    const remainingDaysDiv = document.getElementById('remaining-days');
-    const progressContainer = document.getElementById('progress-container');
-    const progressBar = document.getElementById('progress-bar');
-    const percentageDiv = document.getElementById('percentage');
+    const birthdateInput = $('#birthdate');
+    const deathdateInput = $('#deathdate');
+    const calculateButton = $('#calculate');
+    const livedDaysDiv = $('#lived-days');
+    const remainingDaysDiv = $('#remaining-days');
+    const progressContainer = $('#progress-container');
+    const progressBar = $('#progress-bar');
+    const percentageDiv = $('#percentage');
 
     // 초기 텍스트 설정
-    appName.textContent = chrome.i18n.getMessage('appName');
-    appTitle.textContent = chrome.i18n.getMessage('appName');
-    contactMessage.textContent = chrome.i18n.getMessage('contactMessage');
+    appName.text(chrome.i18n.getMessage('appName'));
+    appTitle.text(chrome.i18n.getMessage('appName'));
+    contactMessage.text(chrome.i18n.getMessage('contactMessage'));
 
-    document.querySelector('label[for="birthdate"]').textContent = chrome.i18n.getMessage('enterBirthdate');
-    document.querySelector('label[for="deathdate"]').textContent = chrome.i18n.getMessage('enterDeathdate');
-    calculateButton.textContent = chrome.i18n.getMessage('calculate');
+    $('label[for="birthdate"]').text(chrome.i18n.getMessage('enterBirthdate'));
+    $('label[for="deathdate"]').text(chrome.i18n.getMessage('enterDeathdate'));
+    calculateButton.text(chrome.i18n.getMessage('calculate'));
 
     chrome.storage.local.get(['birthdate', 'deathdate'], function (result) {
-        if (result.birthdate) birthdateInput.value = result.birthdate;
-        if (result.deathdate) deathdateInput.value = result.deathdate;
+        if (result.birthdate) birthdateInput.val(result.birthdate);
+        if (result.deathdate) deathdateInput.val(result.deathdate);
         if (result.birthdate && result.deathdate) calculateDays();
     });
 
@@ -42,19 +42,19 @@ document.addEventListener('DOMContentLoaded', function () {
     tomorrow.setDate(tomorrow.getDate() + 1);
     
     // deathdate 입력필드의 최소값을 내일로 설정
-    deathdateInput.min = formatDate(tomorrow);
+    deathdateInput.attr('min', formatDate(tomorrow));
 
     // 날짜 입력 필드에 대한 이벤트 리스너 추가
-    birthdateInput.addEventListener('input', function(e) {
+    birthdateInput.on('input', function() {
         validateDateInput(birthdateInput);
     });
 
-    deathdateInput.addEventListener('input', function(e) {
+    deathdateInput.on('input', function() {
         validateDateInput(deathdateInput);
     });
 
     function validateDateInput(inputElement) {
-        const value = inputElement.value;
+        const value = inputElement.val();
         
         // YYYY-MM-DD 형식의 정규식
         const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
@@ -65,15 +65,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const date = new Date(value);
         if (isNaN(date.getTime())) {
-            inputElement.value = '';
+            inputElement.val('');
         }
     }    
 
-    calculateButton.addEventListener('click', calculateDays);
+    calculateButton.on('click', calculateDays);
 
     function calculateDays() {
-        const birthdateValue = birthdateInput.value;
-        const deathdateValue = deathdateInput.value;
+        const birthdateValue = birthdateInput.val();
+        const deathdateValue = deathdateInput.val();
 
         if (!birthdateValue || !deathdateValue) {
             alert(chrome.i18n.getMessage('enterBothDates'));
@@ -128,19 +128,19 @@ document.addEventListener('DOMContentLoaded', function () {
         const progressPercentage = (livedDays / totalDays) * 100;
 
         // 결과 표시
-        livedDaysDiv.innerText = chrome.i18n.getMessage('livedDays', 
-            [livedDays.toLocaleString(), currentAge]);
+        livedDaysDiv.text(chrome.i18n.getMessage('livedDays', 
+            [livedDays.toLocaleString(), currentAge]));
 
         if (remainingDays < 0) {
-            remainingDaysDiv.innerText = chrome.i18n.getMessage('alreadyPassed');
-            progressContainer.style.display = 'none';
+            remainingDaysDiv.text(chrome.i18n.getMessage('alreadyPassed'));
+            progressContainer.hide();
         } else {
-            remainingDaysDiv.innerText = chrome.i18n.getMessage('remainingDays', 
-                [remainingDays.toLocaleString(), remainingYears, remainingMonths, remainingDaysLeft, deathAge]);
-            progressBar.style.width = `${progressPercentage}%`;
-            percentageDiv.innerText = chrome.i18n.getMessage('progressPercentage', 
-                [progressPercentage.toFixed(2)]);
-            progressContainer.style.display = 'block';
+            remainingDaysDiv.text(chrome.i18n.getMessage('remainingDays', 
+                [remainingDays.toLocaleString(), remainingYears, remainingMonths, remainingDaysLeft, deathAge]));
+            progressBar.css('width', `${progressPercentage}%`);
+            percentageDiv.text(chrome.i18n.getMessage('progressPercentage', 
+                [progressPercentage.toFixed(2)]));
+            progressContainer.show();
         }
     }
 });
