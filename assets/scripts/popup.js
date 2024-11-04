@@ -128,15 +128,17 @@ $(document).ready(function () {
         const progressPercentage = (livedDays / totalDays) * 100;
 
         // 결과 표시
-        livedDaysDiv.text(chrome.i18n.getMessage('livedDays', 
-            [livedDays.toLocaleString(), currentAge]));
+        livedDaysDiv.html(chrome.i18n.getMessage('livedDays', 
+            [livedDays.toLocaleString(), currentAge])
+            .replace(/\n/g, '<br>'));
 
         if (remainingDays < 0) {
             remainingDaysDiv.text(chrome.i18n.getMessage('alreadyPassed'));
             progressContainer.hide();
         } else {
-            remainingDaysDiv.text(chrome.i18n.getMessage('remainingDays', 
-                [remainingDays.toLocaleString(), remainingYears, remainingMonths, remainingDaysLeft, deathAge]));
+            remainingDaysDiv.html(chrome.i18n.getMessage('remainingDays', 
+                [remainingDays.toLocaleString(), remainingYears, remainingMonths, remainingDaysLeft, deathAge])
+                .replace(/\n/g, '<br>'));
             progressBar.css('width', `${progressPercentage}%`);
             percentageDiv.text(chrome.i18n.getMessage('progressPercentage', 
                 [progressPercentage.toFixed(2)]));

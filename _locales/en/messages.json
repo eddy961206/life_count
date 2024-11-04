@@ -26,7 +26,7 @@
       }
     },
     "remainingDays": {
-      "message": "You have $days$ days remaining ($years$ years $months$ months $remainingDays$ days)\n(Expected age at death: $deathAge$)",
+      "message": "You have $days$ days remaining \n($years$ years $months$ months $remainingDays$ days)\n(Expected age at death: $deathAge$)",
       "placeholders": {
         "days": {
           "content": "$1"
