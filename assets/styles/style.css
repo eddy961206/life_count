@@ -1,78 +1,133 @@
+:root {
+  --primary-color: #2196F3;
+  --secondary-color: #64B5F6;
+  --background-color: #FFFFFF;
+  --text-color: #333333;
+  --border-color: #E0E0E0;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
 body {
-  font-family: Arial, sans-serif;
-  width: 300px;
-  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  width: 260px;
+  padding: 24px;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 0px;
+  color: var(--primary-color);
+  font-size: 24px;
+  font-weight: 500;
 }
 
 label {
   display: block;
-  margin-top: 15px;
-  font-weight: bold;
-}
-
-input, button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  box-sizing: border-box;
-}
-
-button {
-  margin-top: 20px;
-  background-color: #76c7c0;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #5fb4ac;
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
 }
 
 input[type="date"] {
-  position: relative;
+  width: 90%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background-color: #F5F5F5;
 }
 
-/* 날짜 입력 필드에서 기본 달력 아이콘을 숨기지 않고 유지 */
-input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-datetime-edit {
-  -webkit-appearance: none;
-  display: inline;
+input[type="date"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+  background-color: white;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 24px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px var(--shadow-color);
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
 #lived-days, #remaining-days {
-  margin-top: 15px;
-  font-size: 16px;
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #F5F5F5;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
   text-align: center;
 }
 
 .progress-bar-background {
-  background-color: #e0e0e0;
+  background-color: #E3F2FD;
   width: 100%;
-  height: 20px;
-  margin-top: 20px;
-  border-radius: 10px;
+  height: 12px;
+  margin-top: 24px;
+  border-radius: 6px;
   overflow: hidden;
 }
 
 .progress-bar {
-  background-color: #76c7c0;
+  background-color: var(--primary-color);
   width: 0%;
   height: 100%;
-  transition: width 0.5s;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #percentage {
   text-align: center;
-  margin-top: 10px;
-  font-weight: bold;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary-color);
+}
+
+#contact-info {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+  font-size: 12px;
+  color: #666;
+}
+
+#contact-info a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+#contact-info a:hover {
+  color: var(--secondary-color);
+}
+
+/* 애니메이션 효과 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#lived-days, #remaining-days, #progress-container {
+  animation: fadeIn 0.5s ease;
 }
