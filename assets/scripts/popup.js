@@ -144,5 +144,94 @@ $(document).ready(function () {
                 [progressPercentage.toFixed(2)]));
             progressContainer.show();
         }
+
+        // 그리드 생성 함수 호출
+        createLifeGrid(birthDate, deathDate, today);
     }
+
+    // 그리드 생성 함수
+    function createLifeGrid(birthDate, deathDate, today) {
+        const gridContainer = $('#life-grid');
+        gridContainer.empty();
+
+        const totalWeeks = Math.ceil((deathDate - birthDate) / (1000 * 60 * 60 * 24 * 7));
+        const livedWeeks = Math.ceil((today - birthDate) / (1000 * 60 * 60 * 24 * 7));
+
+        for (let i = 0; i < totalWeeks; i++) {
+            const cell = $('<div>')
+                .addClass('grid-cell')
+                .attr('data-week', i);
+
+            // 이미 산 시간은 채우기
+            if (i < livedWeeks) {
+                cell.addClass('lived');
+            }
+
+            // 현재 주 표시
+            if (i === livedWeeks) {
+                cell.addClass('current');
+            }
+
+            // 10년 단위 구분선
+            if (i % (52 * 10) === 0) {
+                cell.addClass('decade-start');
+            }
+
+            // 마우스 오버 시 정보 표시
+            cell.on('mouseover', function() {
+                const weekDate = new Date(birthDate.getTime() + i * 7 * 24 * 60 * 60 * 1000);
+                const weekInfo = `${weekDate.getFullYear()}년 ${weekDate.getMonth() + 1}월 (${Math.floor(i/52)}세)`;
+                $('#grid-info').text(weekInfo);
+            });
+
+            gridContainer.append(cell);
+        }
+    }
+
+    // 줌 컨트롤
+    let currentZoom = 1;
+    $('#zoom-in').on('click', function() {
+        if (currentZoom < 1.5) {
+            currentZoom += 0.1;
+            $('#life-grid').css('transform', `scale(${currentZoom})`);
+        }
+    });
+
+    $('#zoom-out').on('click', function() {
+        if (currentZoom > 0.5) {
+            currentZoom -= 0.1;
+            $('#life-grid').css('transform', `scale(${currentZoom})`);
+        }
+    });
+
+    // 탭 전환 로직
+    $('.tab-button').on('click', function() {
+        const tabId = $(this).data('tab');
+        
+        // 버튼 활성화 상태 변경
+        $('.tab-button').removeClass('active');
+        $(this).addClass('active');
+        
+        // 컨텐츠 전환
+        $('.tab-content').removeClass('active');
+        $(`#${tabId}-tab`).addClass('active');
+
+        // 그리드 탭으로 전환시 그리드 다시 그리기
+        if (tabId === 'grid') {
+            const birthDate = new Date($('#birthdate').val());
+            const deathDate = new Date($('#deathdate').val());
+            if (!isNaN(birthDate.getTime()) && !isNaN(deathDate.getTime())) {
+                createLifeGrid(birthDate, deathDate, new Date());
+            }
+        }
+    });
+
+    // 계산 버튼 클릭 후 자동으로 그리드 탭으로 전환하는 옵션
+    calculateButton.on('click', function() {
+        calculateDays();
+        // 잠시 후 그리드 탭으로 전환
+        setTimeout(() => {
+            $('.tab-button[data-tab="grid"]').click();
+        }, 1000);
+    });
 });

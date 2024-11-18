@@ -10,30 +10,49 @@
 <body>
   <h2 id="appName"></h2>
 
-  <label for="birthdate">태어난 날짜를 입력 또는 선택하세요:</label>
-  <input type="date" id="birthdate" placeholder="YYYY-MM-DD">
-  
-  <label for="deathdate">사망일을 입력 또는 선택하세요:</label>
-  <input type="date" id="deathdate" placeholder="YYYY-MM-DD" min="">
-
-  <button id="calculate">계산하기</button>
-
-  <div id="lived-days"></div>
-  <div id="remaining-days"></div>
-  <div id="progress-container" style="display: none;">
-    <div class="progress-bar-background">
-      <div id="progress-bar" class="progress-bar"></div>
-    </div>
-    <div id="percentage"></div>
+  <!-- 탭 네비게이션 추가 -->
+  <div class="tab-navigation">
+    <button class="tab-button active" data-tab="basic">기본 정보</button>
+    <button class="tab-button" data-tab="grid">생애 달력</button>
   </div>
 
-  <div id="contact-info" style="font-size: small; text-align: center; margin-top: 20px;"></div>
+  <!-- 기본 정보 탭 -->
+  <div class="tab-content active" id="basic-tab">
+    <label for="birthdate">태어난 날짜를 입력 또는 선택하세요:</label>
+    <input type="date" id="birthdate" placeholder="YYYY-MM-DD">
+    
+    <label for="deathdate">사망일을 입력 또는 선택하세요:</label>
+    <input type="date" id="deathdate" placeholder="YYYY-MM-DD" min="">
+
+    <button id="calculate">계산하기</button>
+
+    <div id="lived-days"></div>
+    <div id="remaining-days"></div>
+    <div id="progress-container" style="display: none;">
+      <div class="progress-bar-background">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <div id="percentage"></div>
+    </div>
+  </div>
+
+  <!-- 그리드 시각화 탭 -->
+  <div class="tab-content" id="grid-tab">
+    <div id="life-grid-container">
+      <div id="grid-controls">
+        <button id="zoom-in">+</button>
+        <button id="zoom-out">-</button>
+      </div>
+      <div id="life-grid"></div>
+      <div id="grid-info"></div>
+    </div>
+  </div>
+
+  <div id="contact-info">
     <p>
       <span id="contactMessage"></span>
       <a href="mailto:skykum2004@gmail.com">skykum2004@gmail.com</a>
     </p>
   </div>
-
-  <script src="popup.js"></script>
 </body>
 </html>
