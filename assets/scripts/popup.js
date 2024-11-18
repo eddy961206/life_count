@@ -149,6 +149,9 @@ $(document).ready(function () {
         createLifeGrid(birthDate, deathDate, today);
     }
 
+    // 툴팁 요소 생성
+    const tooltip = $('<div class="tooltip"></div>').appendTo('body').hide();
+
     // 그리드 생성 함수
     function createLifeGrid(birthDate, deathDate, today) {
         const gridContainer = $('#life-grid');
@@ -177,46 +180,35 @@ $(document).ready(function () {
                 cell.addClass('decade-start');
             }
 
-            // 마우스 오버 시 정보 표시
-            cell.on('mouseover', function() {
+            // 마우스 이벤트 처리
+            cell.on('mousemove', function(e) {
                 const weekDate = new Date(birthDate.getTime() + i * 7 * 24 * 60 * 60 * 1000);
                 const weekInfo = `${weekDate.getFullYear()}년 ${weekDate.getMonth() + 1}월 (${Math.floor(i/52)}세)`;
-                $('#grid-info').text(weekInfo);
+                
+                tooltip.text(weekInfo)
+                    .css({
+                        left: e.pageX + 10,
+                        top: e.pageY + 10
+                    })
+                    .show();
+            }).on('mouseleave', function() {
+                tooltip.hide();
             });
 
             gridContainer.append(cell);
         }
     }
 
-    // 줌 컨트롤
-    let currentZoom = 1;
-    $('#zoom-in').on('click', function() {
-        if (currentZoom < 1.5) {
-            currentZoom += 0.1;
-            $('#life-grid').css('transform', `scale(${currentZoom})`);
-        }
-    });
-
-    $('#zoom-out').on('click', function() {
-        if (currentZoom > 0.5) {
-            currentZoom -= 0.1;
-            $('#life-grid').css('transform', `scale(${currentZoom})`);
-        }
-    });
-
     // 탭 전환 로직
     $('.tab-button').on('click', function() {
         const tabId = $(this).data('tab');
         
-        // 버튼 활성화 상태 변경
         $('.tab-button').removeClass('active');
         $(this).addClass('active');
         
-        // 컨텐츠 전환
         $('.tab-content').removeClass('active');
         $(`#${tabId}-tab`).addClass('active');
 
-        // 그리드 탭으로 전환시 그리드 다시 그리기
         if (tabId === 'grid') {
             const birthDate = new Date($('#birthdate').val());
             const deathDate = new Date($('#deathdate').val());
@@ -226,7 +218,7 @@ $(document).ready(function () {
         }
     });
 
-    // 계산 버튼 클릭 후 자동으로 그리드 탭으로 전환하는 옵션
+    // 계산 버튼 클릭 후 자동으로 그리드 탭으로 전환
     calculateButton.on('click', function() {
         calculateDays();
         // 잠시 후 그리드 탭으로 전환

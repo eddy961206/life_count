@@ -140,20 +140,6 @@ button:hover {
   border-radius: 8px;
 }
 
-#grid-controls {
-  margin-bottom: 10px;
-}
-
-#grid-controls button {
-  padding: 5px 10px;
-  margin-right: 5px;
-  border: none;
-  border-radius: 4px;
-  background: var(--primary-color);
-  color: white;
-  cursor: pointer;
-}
-
 #life-grid {
   display: grid;
   grid-template-columns: repeat(52, 1fr);
@@ -186,13 +172,7 @@ button:hover {
   z-index: 1;
 }
 
-#grid-info {
-  margin-top: 10px;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-  font-size: 0.9em;
-}
+/* 불필요한 스타일 제거 (grid-controls, grid-info 관련) */
 
 /* 10년 단위 구분선 */
 .decade-start {
@@ -264,4 +244,17 @@ body {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* 툴팁 스타일 추가 */
+.tooltip {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 1000;
+  pointer-events: none;
+  transition: all 0.15s ease;
 }
