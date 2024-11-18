@@ -169,7 +169,7 @@ $(document).ready(function () {
             left = x - tooltipWidth - 10; // 마우스 커서 왼쪽에 표시
         }
         
-        // 아래쪽 경계 체크
+        // 아래쪽 계 체크
         if (top + tooltipHeight > windowHeight - margin) {
             top = y - tooltipHeight - 10; // 마우스 커서 위에 표시
         }
@@ -247,7 +247,30 @@ $(document).ready(function () {
         }
     }
 
-    // 탭 전환 로직
+    // 명언 API 호출 및 표시 함수 수정
+    async function fetchAndDisplayQuote() {
+        try {
+            const response = await fetch('https://api.quotable.io/random?tags=life');
+            const data = await response.json();
+            
+            $('.quote-text').text(data.content);
+            $('.quote-author').text(data.author);
+        } catch (error) {
+            console.error('Error fetching quote:', error);
+            // API 호출 실패시 기본 명언 표시
+            const fallbackQuote = {
+                text: "Your time is limited, don't waste it living someone else's life.",
+                author: "Steve Jobs"
+            };
+            $('.quote-text').text(fallbackQuote.text);
+            $('.quote-author').text(fallbackQuote.author);
+        }
+    }
+
+    // 페이지 로드시 명언 표시
+    fetchAndDisplayQuote();
+
+    // 탭 전환 로직 수정
     $('.tab-button').on('click', function() {
         const tabId = $(this).data('tab');
         
@@ -256,6 +279,13 @@ $(document).ready(function () {
         
         $('.tab-content').removeClass('active');
         $(`#${tabId}-tab`).addClass('active');
+
+        // 명언 표시/숨김 처리
+        if (tabId === 'basic') {
+            $('.quote-container').show();
+        } else {
+            $('.quote-container').hide();
+        }
 
         if (tabId === 'grid') {
             const birthDate = new Date($('#birthdate').val());
@@ -274,4 +304,9 @@ $(document).ready(function () {
             $('.tab-button[data-tab="grid"]').click();
         }, 1000);
     });
+
+    // 초기 로드 시 기본 탭이 active이므로 명언 표시
+    if ($('.tab-button[data-tab="basic"]').hasClass('active')) {
+        $('.quote-container').show();
+    }
 });

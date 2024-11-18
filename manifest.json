@@ -19,5 +19,10 @@
       "128": "assets/images/icon128.png"
     }
   },
-  "permissions": ["storage"]
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://api.quotable.io/*"
+  ]
 }
