@@ -16,8 +16,8 @@
   </div>
 
   <div class="tab-navigation">
-    <button class="tab-button active" data-tab="basic">기본 정보</button>
-    <button class="tab-button" data-tab="grid">생애 달력</button>
+    <button class="tab-button active" data-tab="basic" id="basicInfoTab"></button>
+    <button class="tab-button" data-tab="grid" id="lifeCalendarTab"></button>
   </div>
 
   <!-- 기본 정보 탭 -->
@@ -38,31 +38,31 @@
       </div>
       <div id="percentage"></div>
       <div id="time-value-container">
-        <h3>남은 시간으로 할 수 있는 것들:</h3>
+        <h3 id="timeValueTitle"></h3>
         <div class="time-value-grid">
           <div class="time-value-item">
             <span class="time-value-icon">🎬</span>
             <span class="time-value-count" id="movies-count"></span>
-            <span class="time-value-label">영화 감상</span>
-            <span class="time-value-note">(평균 2시간 30분)</span>
+            <span class="time-value-label" id="movieWatching"></span>
+            <span class="time-value-note" id="movieTime"></span>
           </div>
           <div class="time-value-item">
             <span class="time-value-icon">📚</span>
             <span class="time-value-count" id="books-count"></span>
-            <span class="time-value-label">책 읽기</span>
-            <span class="time-value-note">(평균 5시간)</span>
+            <span class="time-value-label" id="bookReading"></span>
+            <span class="time-value-note" id="bookTime"></span>
           </div>
           <div class="time-value-item">
             <span class="time-value-icon">☕</span>
             <span class="time-value-count" id="coffee-count"></span>
-            <span class="time-value-label">커피 한잔</span>
-            <span class="time-value-note">(여유있게 30분)</span>
+            <span class="time-value-label" id="coffeeTime"></span>
+            <span class="time-value-note" id="coffeeTimeNote"></span>
           </div>
           <div class="time-value-item">
             <span class="time-value-icon">💤</span>
             <span class="time-value-count" id="sleep-count"></span>
-            <span class="time-value-label">숙면</span>
-            <span class="time-value-note">(하루 8시간)</span>
+            <span class="time-value-label" id="goodSleep"></span>
+            <span class="time-value-note" id="sleepTime"></span>
           </div>
         </div>
       </div>
@@ -74,20 +74,20 @@
     <div class="grid-legend">
       <div class="legend-item">
         <div class="legend-box lived"></div>
-        <span>살아온 시간</span>
+        <span id="gridLegendLived"></span>
       </div>
       <div class="legend-item">
         <div class="legend-box current"></div>
-        <span>현재</span>
+        <span id="gridLegendCurrent"></span>
       </div>
       <div class="legend-item">
         <div class="legend-box"></div>
-        <span>남은 시간</span>
+        <span id="gridLegendRemaining"></span>
       </div>
     </div>
     <div class="grid-info">
-      <p>각 칸은 1주를 나타내며, 굵은 선은 10년 단위를 표시합니다.</p>
-      <p>마우스를 올리면 해당 시기의 정보를 볼 수 있습니다.</p>
+      <p id="gridInfoWeek"></p>
+      <p id="gridInfoHover"></p>
     </div>
     <div id="life-grid-container">
       <div id="life-grid"></div>

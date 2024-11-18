@@ -198,7 +198,7 @@ $(document).ready(function () {
             if (i % 52 === 0) {
                 const yearMarker = $('<div>')
                     .addClass('year-marker')
-                    .text(`${currentYear} (${Math.floor(i/52)}세)`);
+                    .text(chrome.i18n.getMessage('ageYearFormat', [currentYear, Math.floor(i/52)]));
                 gridContainer.append(yearMarker);
                 currentYear++;
             }
@@ -227,7 +227,12 @@ $(document).ready(function () {
                 const weekDate = new Date(birthDate.getTime() + i * 7 * 24 * 60 * 60 * 1000);
                 const age = Math.floor(i/52);
                 const weekOfYear = Math.floor((i % 52) + 1);
-                const weekInfo = `${weekDate.getFullYear()}년 ${weekDate.getMonth() + 1}월\n${age}세 ${weekOfYear}주차`;
+                const weekInfo = chrome.i18n.getMessage('weekInfoFormat', [
+                    weekDate.getFullYear(),
+                    weekDate.getMonth() + 1,
+                    age,
+                    weekOfYear
+                ]);
                 
                 const position = adjustTooltipPosition(
                     tooltip, 
@@ -329,11 +334,29 @@ $(document).ready(function () {
         }
 
         // 결과 표시
-        $('#movies-count').text(formatNumber(movies) + '편');
-        $('#books-count').text(formatNumber(books) + '권');
-        $('#coffee-count').text(formatNumber(coffees) + '잔');
-        $('#sleep-count').text(formatNumber(sleeps) + '일');
+        $('#movies-count').text(chrome.i18n.getMessage('countMovie', [formatNumber(movies)]));
+        $('#books-count').text(chrome.i18n.getMessage('countBook', [formatNumber(books)]));
+        $('#coffee-count').text(chrome.i18n.getMessage('countCoffee', [formatNumber(coffees)]));
+        $('#sleep-count').text(chrome.i18n.getMessage('countSleep', [formatNumber(sleeps)]));
 
         $('#time-value-container').show();
     }
+
+    // 새로운 초기화 코드 추가
+    $('#basicInfoTab').text(chrome.i18n.getMessage('basicInfoTab'));
+    $('#lifeCalendarTab').text(chrome.i18n.getMessage('lifeCalendarTab'));
+    $('#timeValueTitle').text(chrome.i18n.getMessage('timeValueTitle'));
+    $('#movieWatching').text(chrome.i18n.getMessage('movieWatching'));
+    $('#movieTime').text(chrome.i18n.getMessage('movieTime'));
+    $('#bookReading').text(chrome.i18n.getMessage('bookReading'));
+    $('#bookTime').text(chrome.i18n.getMessage('bookTime'));
+    $('#coffeeTime').text(chrome.i18n.getMessage('coffeeTime'));
+    $('#coffeeTimeNote').text(chrome.i18n.getMessage('coffeeTimeNote'));
+    $('#goodSleep').text(chrome.i18n.getMessage('goodSleep'));
+    $('#sleepTime').text(chrome.i18n.getMessage('sleepTime'));
+    $('#gridLegendLived').text(chrome.i18n.getMessage('gridLegendLived'));
+    $('#gridLegendCurrent').text(chrome.i18n.getMessage('gridLegendCurrent'));
+    $('#gridLegendRemaining').text(chrome.i18n.getMessage('gridLegendRemaining'));
+    $('#gridInfoWeek').text(chrome.i18n.getMessage('gridInfoWeek'));
+    $('#gridInfoHover').text(chrome.i18n.getMessage('gridInfoHover'));
 });

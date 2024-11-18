@@ -67,5 +67,113 @@
     },
     "contactMessage": {
       "message": "* 개선사항, 불편사항 있으시면 문의 남겨주겨세요:"
+    },
+    "basicInfoTab": {
+        "message": "기본 정보"
+    },
+    "lifeCalendarTab": {
+        "message": "생애 달력"
+    },
+    "timeValueTitle": {
+        "message": "남은 시간으로 할 수 있는 것들:"
+    },
+    "movieWatching": {
+        "message": "영화 감상"
+    },
+    "movieTime": {
+        "message": "(평균 2시간 30분)"
+    },
+    "bookReading": {
+        "message": "책 읽기"
+    },
+    "bookTime": {
+        "message": "(평균 5시간)"
+    },
+    "coffeeTime": {
+        "message": "커피 한잔"
+    },
+    "coffeeTimeNote": {
+        "message": "(여유있게 30분)"
+    },
+    "goodSleep": {
+        "message": "숙면"
+    },
+    "sleepTime": {
+        "message": "(하루 8시간)"
+    },
+    "gridLegendLived": {
+        "message": "살아온 시간"
+    },
+    "gridLegendCurrent": {
+        "message": "현재"
+    },
+    "gridLegendRemaining": {
+        "message": "남은 시간"
+    },
+    "gridInfoWeek": {
+        "message": "각 칸은 1주를 나타내며, 굵은 선은 10년 단위를 표시합니다."
+    },
+    "gridInfoHover": {
+        "message": "마우스를 올리면 해당 시기의 정보를 볼 수 있습니다."
+    },
+    "ageYearFormat": {
+        "message": "$year$년 ($age$세)",
+        "placeholders": {
+            "year": {
+                "content": "$1"
+            },
+            "age": {
+                "content": "$2"
+            }
+        }
+    },
+    "weekInfoFormat": {
+        "message": "$year$년 $month$월\n$age$세 $week$주차",
+        "placeholders": {
+            "year": {
+                "content": "$1"
+            },
+            "month": {
+                "content": "$2"
+            },
+            "age": {
+                "content": "$3"
+            },
+            "week": {
+                "content": "$4"
+            }
+        }
+    },
+    "countMovie": {
+        "message": "$count$편",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "countBook": {
+        "message": "$count$권",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "countCoffee": {
+        "message": "$count$잔",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "countSleep": {
+        "message": "$count$일",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
     }
-  }
+}

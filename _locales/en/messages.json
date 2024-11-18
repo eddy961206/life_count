@@ -67,5 +67,113 @@
     },
     "contactMessage": {
       "message": "* If you have any suggestions or issues, please contact:"
+    },
+    "basicInfoTab": {
+        "message": "Basic Info"
+    },
+    "lifeCalendarTab": {
+        "message": "Life Calendar"
+    },
+    "timeValueTitle": {
+        "message": "What you can do with remaining time:"
+    },
+    "movieWatching": {
+        "message": "Watch Movies"
+    },
+    "movieTime": {
+        "message": "(avg. 2.5 hours)"
+    },
+    "bookReading": {
+        "message": "Read Books"
+    },
+    "bookTime": {
+        "message": "(avg. 5 hours)"
+    },
+    "coffeeTime": {
+        "message": "Coffee Break"
+    },
+    "coffeeTimeNote": {
+        "message": "(leisurely 30 min)"
+    },
+    "goodSleep": {
+        "message": "Good Sleep"
+    },
+    "sleepTime": {
+        "message": "(8 hours/day)"
+    },
+    "gridLegendLived": {
+        "message": "Time Lived"
+    },
+    "gridLegendCurrent": {
+        "message": "Current"
+    },
+    "gridLegendRemaining": {
+        "message": "Remaining Time"
+    },
+    "gridInfoWeek": {
+        "message": "Each box represents 1 week, bold lines mark decades."
+    },
+    "gridInfoHover": {
+        "message": "Hover over boxes to see detailed information."
+    },
+    "ageYearFormat": {
+        "message": "$year$ (Age $age$)",
+        "placeholders": {
+            "year": {
+                "content": "$1"
+            },
+            "age": {
+                "content": "$2"
+            }
+        }
+    },
+    "weekInfoFormat": {
+        "message": "$year$ $month$\nAge $age$, Week $week$",
+        "placeholders": {
+            "year": {
+                "content": "$1"
+            },
+            "month": {
+                "content": "$2"
+            },
+            "age": {
+                "content": "$3"
+            },
+            "week": {
+                "content": "$4"
+            }
+        }
+    },
+    "countMovie": {
+        "message": "$count$ movies",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "countBook": {
+        "message": "$count$ books",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "countCoffee": {
+        "message": "$count$ cups",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "countSleep": {
+        "message": "$count$ days",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
     }
   }
