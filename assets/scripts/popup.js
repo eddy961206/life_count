@@ -300,15 +300,6 @@ $(document).ready(function () {
         }
     });
 
-    // 계산 버튼 클릭 후 자동으로 그리드 탭으로 전환
-    calculateButton.on('click', function() {
-        calculateDays();
-        // 잠시 후 그리드 탭으로 전환
-        setTimeout(() => {
-            $('.tab-button[data-tab="grid"]').click();
-        }, 1000);
-    });
-
     // 초기 로드 시 기본 탭이 active이므로 명언 표시
     if ($('.tab-button[data-tab="basic"]').hasClass('active')) {
         $('.quote-container').show();
