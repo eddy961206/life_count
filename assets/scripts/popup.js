@@ -152,6 +152,31 @@ $(document).ready(function () {
     // 툴팁 요소 생성
     const tooltip = $('<div class="tooltip"></div>').appendTo('body').hide();
 
+    // 툴팁 위치 조정 함수 추가
+    function adjustTooltipPosition(tooltip, x, y, windowWidth, windowHeight) {
+        const tooltipWidth = tooltip.outerWidth();
+        const tooltipHeight = tooltip.outerHeight();
+        
+        // 팝업 창 경계 기준 여백
+        const margin = 5;
+        
+        // 기본 위치 (마우스 커서 오른쪽 아래)
+        let left = x + 10;
+        let top = y + 10;
+        
+        // 오른쪽 경계 체크
+        if (left + tooltipWidth > windowWidth - margin) {
+            left = x - tooltipWidth - 10; // 마우스 커서 왼쪽에 표시
+        }
+        
+        // 아래쪽 경계 체크
+        if (top + tooltipHeight > windowHeight - margin) {
+            top = y - tooltipHeight - 10; // 마우스 커서 위에 표시
+        }
+        
+        return { left, top };
+    }
+
     // 그리드 생성 함수
     function createLifeGrid(birthDate, deathDate, today) {
         const gridContainer = $('#life-grid');
@@ -160,7 +185,20 @@ $(document).ready(function () {
         const totalWeeks = Math.ceil((deathDate - birthDate) / (1000 * 60 * 60 * 24 * 7));
         const livedWeeks = Math.ceil((today - birthDate) / (1000 * 60 * 60 * 24 * 7));
 
+        // 현재 연도 표시 추가
+        let currentYear = birthDate.getFullYear();
+        let weekCounter = 0;
+
         for (let i = 0; i < totalWeeks; i++) {
+            // 새로운 연도 시작시 연도 표시
+            if (i % 52 === 0) {
+                const yearMarker = $('<div>')
+                    .addClass('year-marker')
+                    .text(`${currentYear} (${Math.floor(i/52)}세)`);
+                gridContainer.append(yearMarker);
+                currentYear++;
+            }
+
             const cell = $('<div>')
                 .addClass('grid-cell')
                 .attr('data-week', i);
@@ -183,12 +221,22 @@ $(document).ready(function () {
             // 마우스 이벤트 처리
             cell.on('mousemove', function(e) {
                 const weekDate = new Date(birthDate.getTime() + i * 7 * 24 * 60 * 60 * 1000);
-                const weekInfo = `${weekDate.getFullYear()}년 ${weekDate.getMonth() + 1}월 (${Math.floor(i/52)}세)`;
+                const age = Math.floor(i/52);
+                const weekOfYear = Math.floor((i % 52) + 1);
+                const weekInfo = `${weekDate.getFullYear()}년 ${weekDate.getMonth() + 1}월\n${age}세 ${weekOfYear}주차`;
                 
-                tooltip.text(weekInfo)
+                const position = adjustTooltipPosition(
+                    tooltip, 
+                    e.pageX, 
+                    e.pageY, 
+                    $(window).width(), 
+                    $(window).height()
+                );
+                
+                tooltip.html(weekInfo.replace('\n', '<br>'))
                     .css({
-                        left: e.pageX + 10,
-                        top: e.pageY + 10
+                        left: position.left,
+                        top: position.top
                     })
                     .show();
             }).on('mouseleave', function() {
