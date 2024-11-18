@@ -135,6 +135,7 @@ $(document).ready(function () {
         if (remainingDays < 0) {
             remainingDaysDiv.text(chrome.i18n.getMessage('alreadyPassed'));
             progressContainer.hide();
+            $('#time-value-container').hide();
         } else {
             remainingDaysDiv.html(chrome.i18n.getMessage('remainingDays', 
                 [remainingDays.toLocaleString(), remainingYears, remainingMonths, remainingDaysLeft, deathAge])
@@ -143,6 +144,9 @@ $(document).ready(function () {
             percentageDiv.text(chrome.i18n.getMessage('progressPercentage', 
                 [progressPercentage.toFixed(2)]));
             progressContainer.show();
+
+            // 시간 가치화 계산
+            calculateTimeValue(remainingDays);
         }
 
         // 그리드 생성 함수 호출
@@ -308,5 +312,37 @@ $(document).ready(function () {
     // 초기 로드 시 기본 탭이 active이므로 명언 표시
     if ($('.tab-button[data-tab="basic"]').hasClass('active')) {
         $('.quote-container').show();
+    }
+
+    // 시간 가치화 계산 함수
+    function calculateTimeValue(remainingDays) {
+        const remainingHours = remainingDays * 24;
+        
+        // 각 활동별 평균 소요 시간 (시간 단위)
+        const timeValues = {
+            movie: 2.5,    // 영화 한 편 평균 2.5시간
+            book: 5,       // 책 한 권 평균 5시간
+            coffee: 0.5,   // 커피 한 잔 여유있게 마시기 30분
+            sleep: 8       // 하루 평균 수면 시간 8시간
+        };
+
+        // 각 활동별 가능한 횟수 계산
+        const movies = Math.floor(remainingHours / timeValues.movie);
+        const books = Math.floor(remainingHours / timeValues.book);
+        const coffees = Math.floor(remainingHours / timeValues.coffee);
+        const sleeps = Math.floor(remainingDays);  // 하루 단위로 계산
+
+        // 숫자 포맷팅 (천 단위 콤마)
+        function formatNumber(num) {
+            return num.toLocaleString();
+        }
+
+        // 결과 표시
+        $('#movies-count').text(formatNumber(movies) + '편');
+        $('#books-count').text(formatNumber(books) + '권');
+        $('#coffee-count').text(formatNumber(coffees) + '잔');
+        $('#sleep-count').text(formatNumber(sleeps) + '일');
+
+        $('#time-value-container').show();
     }
 });
